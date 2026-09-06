@@ -119,151 +119,164 @@ function initZelezarnyInteractions() {
 }
 
 
-function initProjectFlow() {
-  const scene = document.getElementById("flowScene");
-  const wagon = document.getElementById("flowWagon");
-  if (!scene || !wagon) return;
+function initProjectProcess() {
+  const viewport = document.getElementById("processViewport");
+  const wagon = document.getElementById("flowWagonSvg");
+  if (!viewport || !wagon) return;
 
-  const statusCounter = document.getElementById("flowStatusCounter");
-  const statusMode = document.getElementById("flowStatusMode");
-  const statusTitle = document.getElementById("flowStatusTitle");
-  const statusText = document.getElementById("flowStatusText");
-  const nodeMap = new Map([...scene.querySelectorAll(".flow-node")].map(node => [node.dataset.stop, node]));
-  const craneMap = new Map([...scene.querySelectorAll(".flow-crane")].map(crane => [crane.dataset.crane, crane]));
-  const motionMedia = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const stepEl = document.getElementById("processStep");
+  const wagonTypeEl = document.getElementById("processWagonType");
+  const titleEl = document.getElementById("processTitle");
+  const textEl = document.getElementById("processText");
+  const wagonName = document.getElementById("wagonName");
+  const scaleValue = document.getElementById("scaleValue");
+  const facilities = new Map([...document.querySelectorAll("[data-facility]")].map(el => [el.dataset.facility, el]));
+  const legends = new Map([...document.querySelectorAll("[data-legend]")].map(el => [el.dataset.legend, el]));
+  const scrapCrane = document.getElementById("scrapCrane");
+  const scrapDrop = document.getElementById("scrapDrop");
+  const portalCrane = document.getElementById("portalCrane");
+  const motionReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const positions = { yard: 72, scrap: 338, furnace: 624, rolling: 900, scale: 1110, transshipment: 1370 };
+  let x = positions.yard;
+  let started = false;
 
-  let currentX = 0;
-  let currentY = 0;
-  let isAnimating = false;
+  const wait = ms => new Promise(resolve => setTimeout(resolve, motionReduced ? Math.min(ms, 80) : ms));
+  const ease = t => 1 - Math.pow(1 - t, 4);
 
-  const updateTargets = () => {
-    const yardNode = nodeMap.get("yard");
-    if (!yardNode) return;
-    const sceneRect = scene.getBoundingClientRect();
-    const yardRect = yardNode.getBoundingClientRect();
-    currentX = yardRect.left - sceneRect.left + yardRect.width / 2 - wagon.offsetWidth / 2;
-    currentY = parseFloat(getComputedStyle(wagon).top) || 308;
-    wagon.style.transform = `translate3d(${currentX}px, 0, 0)`;
+  const setStatus = (step, type, title, text) => {
+    if (stepEl) stepEl.textContent = step;
+    if (wagonTypeEl) wagonTypeEl.textContent = type;
+    if (titleEl) titleEl.textContent = title;
+    if (textEl) textEl.textContent = text;
   };
 
-  const clearActive = () => {
-    nodeMap.forEach(node => node.classList.remove("active", "is-processing"));
-    craneMap.forEach(crane => crane.classList.remove("is-active"));
-  };
-
-  const setStatus = (counter, mode, title, text) => {
-    if (statusCounter) statusCounter.textContent = counter;
-    if (statusMode) statusMode.textContent = mode;
-    if (statusTitle) statusTitle.textContent = title;
-    if (statusText) statusText.textContent = text;
-  };
-
-  const setWagonState = ({ type, load }) => {
-    wagon.classList.remove("eanos", "res", "empty", "scrap", "billets", "is-loading", "is-unloading", "is-transforming");
-    wagon.classList.add(type);
-    wagon.classList.add(load);
-    const label = wagon.querySelector(".wagon-label");
-    if (label) label.textContent = type === "res" ? "Res" : "Eanos";
-  };
-
-  const wait = ms => new Promise(resolve => window.setTimeout(resolve, ms));
-
-  const moveTo = async (stopId, duration = 1800) => {
-    const node = nodeMap.get(stopId);
-    if (!node) return;
-    clearActive();
-    node.classList.add("active");
-    const sceneRect = scene.getBoundingClientRect();
-    const nodeRect = node.getBoundingClientRect();
-    const targetX = nodeRect.left - sceneRect.left + nodeRect.width / 2 - wagon.offsetWidth / 2;
-    const seconds = motionMedia.matches ? 0.01 : duration / 1000;
-    wagon.style.transition = `transform ${seconds}s cubic-bezier(.2,.8,.25,1), top .65s ease, width .65s ease, height .65s ease`;
-    wagon.style.transform = `translate3d(${targetX}px, 0, 0)`;
-    currentX = targetX;
-    await wait(motionMedia.matches ? 20 : duration + 60);
-  };
-
-  const processAt = async ({ stopId, craneId, processing = 1200, actionClass = "is-loading" }) => {
-    const node = nodeMap.get(stopId);
-    const crane = craneId ? craneMap.get(craneId) : null;
-    if (node) node.classList.add("is-processing");
-    if (crane) crane.classList.add("is-active");
-    wagon.classList.add(actionClass);
-    await wait(motionMedia.matches ? 40 : processing);
-    wagon.classList.remove(actionClass);
-    if (node) node.classList.remove("is-processing");
-    if (crane) crane.classList.remove("is-active");
-  };
-
-  const transformWagon = async () => {
-    wagon.classList.add("is-transforming");
-    wagon.style.transform = `translate3d(${currentX}px, 0, 0) scale(.96)`;
-    await wait(motionMedia.matches ? 30 : 260);
-    setWagonState({ type: "res", load: "empty" });
-    const sceneRect = scene.getBoundingClientRect();
-    const furnaceNode = nodeMap.get("furnace");
-    if (furnaceNode) {
-      const nodeRect = furnaceNode.getBoundingClientRect();
-      currentX = nodeRect.left - sceneRect.left + nodeRect.width / 2 - wagon.offsetWidth / 2;
+  const activate = key => {
+    facilities.forEach(el => el.classList.remove("active", "processing"));
+    legends.forEach(el => el.classList.remove("active"));
+    if (key === "return") {
+      facilities.get("yard")?.classList.add("active");
+      legends.get("return")?.classList.add("active");
+      return;
     }
-    wagon.style.transform = `translate3d(${currentX}px, 0, 0) scale(1)`;
-    await wait(motionMedia.matches ? 30 : 340);
-    wagon.classList.remove("is-transforming");
+    facilities.get(key)?.classList.add("active");
+    legends.get(key)?.classList.add("active");
+  };
+
+  const setWagon = (type, load) => {
+    wagon.classList.toggle("is-eanos", type === "eanos");
+    wagon.classList.toggle("is-res", type === "res");
+    wagon.classList.toggle("load-scrap", load === "scrap");
+    wagon.classList.toggle("load-billets", load === "billets");
+    wagon.classList.toggle("is-empty", load === "empty");
+    if (wagonName) wagonName.textContent = type === "res" ? "Res" : "Eanos";
+  };
+
+  const moveTo = (target, duration) => new Promise(resolve => {
+    if (motionReduced) {
+      x = target;
+      wagon.setAttribute("transform", `translate(${x} 396)`);
+      resolve();
+      return;
+    }
+    const from = x;
+    const distance = target - from;
+    const start = performance.now();
+    const frame = now => {
+      const p = Math.min(1, (now - start) / duration);
+      x = from + distance * ease(p);
+      wagon.setAttribute("transform", `translate(${x.toFixed(2)} 396)`);
+      if (p < 1) requestAnimationFrame(frame);
+      else resolve();
+    };
+    requestAnimationFrame(frame);
+  });
+
+  const processFacility = async (key, duration) => {
+    facilities.get(key)?.classList.add("processing");
+    await wait(duration);
+    facilities.get(key)?.classList.remove("processing");
   };
 
   const run = async () => {
-    if (isAnimating) return;
-    isAnimating = true;
-    updateTargets();
+    if (started) return;
+    started = true;
     while (true) {
-      setWagonState({ type: "eanos", load: "empty" });
-      clearActive();
-      nodeMap.get("yard")?.classList.add("active");
-      setStatus("1 / 7", "EANOS / PRÁZDNÝ", "Prázdný vůz Eanos odjíždí ze seřadiště.", "Vůz je připravený na seřadišti a míří na šrotové pole, kde bude naložen hutním šrotem.");
-      updateTargets();
-      await wait(motionMedia.matches ? 120 : 900);
+      x = positions.yard;
+      wagon.setAttribute("transform", `translate(${x} 396)`);
+      setWagon("eanos", "empty");
+      activate("yard");
+      setStatus("1 / 7", "EANOS · PRÁZDNÝ", "Prázdný Eanos odjíždí ze seřadiště.", "Vůz je připravený pro obsluhu šrotového pole.");
+      await wait(900);
 
-      setStatus("2 / 7", "EANOS / NAKLÁDKA", "Eanos přijíždí na šrotové pole.", "Jeřáb na šrotovém poli naloží vůz hutním šrotem a připraví jej pro odvoz k elektrické peci.");
-      await moveTo("scrap", 1750);
-      await processAt({ stopId: "scrap", craneId: "scrap", processing: 1700, actionClass: "is-loading" });
-      setWagonState({ type: "eanos", load: "scrap" });
-      await wait(motionMedia.matches ? 50 : 350);
+      activate("scrap");
+      setStatus("2 / 7", "EANOS · NAKLÁDKA", "Eanos přijíždí na šrotové pole.", "Jeřáb spustí drapák a postupně naplní vůz hutním šrotem.");
+      await moveTo(positions.scrap, 1900);
+      scrapCrane?.classList.add("active");
+      scrapDrop?.classList.add("active");
+      await processFacility("scrap", 1900);
+      setWagon("eanos", "scrap");
+      scrapCrane?.classList.remove("active");
+      scrapDrop?.classList.remove("active");
+      await wait(350);
 
-      setStatus("3 / 7", "EANOS / ŠROT", "Ložený Eanos míří k elektrické peci.", "Po naložení šrotu pokračuje vůz přímo k elektrické peci, kde bude obsah vyložen.");
-      await moveTo("furnace", 1900);
-      await processAt({ stopId: "furnace", processing: 1350, actionClass: "is-unloading" });
-      setWagonState({ type: "eanos", load: "empty" });
-      await transformWagon();
+      activate("furnace");
+      setStatus("3 / 7", "EANOS · ŠROT", "Ložený vůz míří k elektrické peci.", "U pece se šrot vyloží a vůz se uvolní pro další část provozního cyklu.");
+      await moveTo(positions.furnace, 2050);
+      await processFacility("furnace", 1700);
+      setWagon("eanos", "empty");
+      wagon.classList.add("transforming");
+      await wait(280);
+      setWagon("res", "empty");
+      await wait(320);
+      wagon.classList.remove("transforming");
 
-      setStatus("4 / 7", "RES / NAKLÁDKA", "U válcovny se z vozu stává Res.", "Po vyložení šrotu pokračuje již jako prázdný Res do válcovny, kde budou naloženy železné sochory.");
-      await moveTo("rolling", 1450);
-      await processAt({ stopId: "rolling", processing: 1500, actionClass: "is-loading" });
-      setWagonState({ type: "res", load: "billets" });
-      await wait(motionMedia.matches ? 50 : 300);
+      activate("rolling");
+      setStatus("4 / 7", "RES · NAKLÁDKA", "Prázdný Res přejíždí k válcovně.", "Vedle elektrické pece se na plošinový vůz naloží železné sochory.");
+      await moveTo(positions.rolling, 1700);
+      await processFacility("rolling", 1500);
+      setWagon("res", "billets");
+      await wait(400);
 
-      setStatus("5 / 7", "RES / SOCHORY", "Ložený Res projíždí přes dynamickou kolejovou váhu.", "Na průjezdné koleji je vůz zvážen a bez zastavení pokračuje směrem k překladišti.");
-      await moveTo("scale", 1100);
-      await processAt({ stopId: "scale", processing: 900, actionClass: "is-loading" });
+      activate("scale");
+      setStatus("5 / 7", "RES · SOCHORY", "Ložený Res projíždí přes dynamickou váhu.", "Vůz se za jízdy zváží a pokračuje bez dalšího odstavení směrem k expedici.");
+      if (scaleValue) scaleValue.textContent = "--.- t";
+      await moveTo(positions.scale, 1250);
+      facilities.get("scale")?.classList.add("processing");
+      await wait(450);
+      if (scaleValue) scaleValue.textContent = "72.4 t";
+      await wait(850);
+      facilities.get("scale")?.classList.remove("processing");
 
-      setStatus("6 / 7", "RES / VYKLÁDKA", "Res přijíždí na překladiště.", "Portálový jeřáb vyloží sochory a připraví vůz na návrat do seřadiště.");
-      await moveTo("transshipment", 1500);
-      await processAt({ stopId: "transshipment", craneId: "portal", processing: 1700, actionClass: "is-unloading" });
-      setWagonState({ type: "res", load: "empty" });
-      await wait(motionMedia.matches ? 50 : 260);
+      activate("transshipment");
+      setStatus("6 / 7", "RES · VYKLÁDKA", "Res přijíždí na překladiště.", "Portálový jeřáb zvedne sochory z vozu a uloží je do expedičního prostoru.");
+      await moveTo(positions.transshipment, 1650);
+      portalCrane?.classList.add("active");
+      await processFacility("transshipment", 1900);
+      setWagon("res", "empty");
+      portalCrane?.classList.remove("active");
+      await wait(380);
 
-      setStatus("7 / 7", "RES / PRÁZDNÝ", "Prázdný vůz se vrací zpět na seřadiště.", "Po vykládce odjíždí prázdný vůz zpět na seřaďovací koleje, kde čeká na další provozní oběh.");
-      await moveTo("yard", 2350);
-      await wait(motionMedia.matches ? 140 : 1250);
+      activate("return");
+      setStatus("7 / 7", "RES · PRÁZDNÝ", "Prázdný vůz se vrací na seřadiště.", "Po vykládce se Res vrací zpět na výchozí koleje a provozní cyklus může začít znovu.");
+      await moveTo(positions.yard, 2800);
+      await wait(1700);
     }
   };
 
-  updateTargets();
-  run();
-  window.addEventListener("resize", () => window.requestAnimationFrame(updateTargets));
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      run();
+      observer.disconnect();
+    });
+  }, { threshold: .28 });
+
+  observer.observe(viewport);
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
   renderZelezarnyHeader();
   initZelezarnyInteractions();
-  initProjectFlow();
+  initProjectProcess();
 });

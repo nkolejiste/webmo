@@ -24,170 +24,227 @@
           <h1 class="page-title reveal">Železárny</h1>
         </div>
         <p class="page-intro reveal">
-          Typický provozní cyklus od prázdného vozu se šrotem až po expedici hotových sochorů.
+          Jeden provozní cyklus od šrotu až po expedici hotových sochorů.
         </p>
       </div>
     </section>
 
-    <section class="flow-section">
+    <section class="process-section" id="provozni-cyklus">
       <div class="container">
-        <div class="flow-heading reveal">
+        <div class="process-heading reveal">
           <div>
-            <p class="eyebrow">MODEL PROVOZU</p>
-            <h2 class="section-title">Jeden vůz, celý hutní oběh.</h2>
+            <p class="eyebrow">PROVOZNÍ CYKLUS</p>
+            <h2 class="section-title">Od prázdného Eanosu k expedici.</h2>
           </div>
-          <p class="flow-heading-copy">
-            Animace ukazuje jeden z typických oběhů na kolejišti: prázdný Eanos odjíždí ze seřadiště na šrotové pole, po naložení zamíří k elektrické peci, poté se změní na Res pro expedici sochorů a přes dynamickou kolejovou váhu dojede až na překladiště.
+          <p class="process-intro">
+            Po sjetí k animaci se vůz rozjede ze seřadiště. Projde šrotovým polem, elektrickou pecí, válcovnou, dynamickou kolejovou váhou a překladištěm, odkud se prázdný vrátí zpět.
           </p>
         </div>
 
-        <div class="flow-panel reveal">
-          <div class="flow-status-card">
-            <div class="flow-status-meta">
-              <span id="flowStatusCounter">1 / 7</span>
-              <span id="flowStatusMode">EA NOS / PRÁZDNÝ</span>
-            </div>
-            <h3 id="flowStatusTitle">Prázdný vůz Eanos odjíždí ze seřadiště.</h3>
-            <p id="flowStatusText">
-              Vůz je připravený na seřadišti a míří na šrotové pole, kde bude naložen hutním šrotem.
-            </p>
+        <div class="process-status reveal">
+          <div class="process-status-topline">
+            <span id="processStep">1 / 7</span>
+            <span id="processWagonType">EANOS · PRÁZDNÝ</span>
           </div>
-
-          <div class="flow-scene-shell">
-            <div class="flow-scene-wrap">
-              <div class="flow-scene" id="flowScene">
-                <div class="flow-track"></div>
-                <div class="flow-track-return"></div>
-
-                <div class="flow-node active" data-stop="yard" style="--x: 8%;">
-                  <div class="flow-node-visual flow-yard-visual">
-                    <span></span><span></span><span></span>
-                  </div>
-                  <h3>Seřadiště</h3>
-                  <p>Výchozí a cílový bod oběhu.</p>
-                </div>
-
-                <div class="flow-node" data-stop="scrap" style="--x: 25%;">
-                  <div class="flow-node-visual flow-scrap-visual">
-                    <span></span>
-                    <div class="flow-crane flow-scrap-crane" data-crane="scrap">
-                      <div class="crane-mast"></div>
-                      <div class="crane-arm"></div>
-                      <div class="crane-cable"></div>
-                      <div class="crane-hook"></div>
-                    </div>
-                  </div>
-                  <h3>Šrotové pole</h3>
-                  <p>Nakládka šrotu do Eanosu.</p>
-                </div>
-
-                <div class="flow-node" data-stop="furnace" style="--x: 45%;">
-                  <div class="flow-node-visual flow-furnace-visual">
-                    <span></span><span></span>
-                    <div class="furnace-glow"></div>
-                  </div>
-                  <h3>Elektrická pec</h3>
-                  <p>Vykládka šrotu a tavba.</p>
-                </div>
-
-                <div class="flow-node" data-stop="rolling" style="--x: 60%;">
-                  <div class="flow-node-visual flow-rolling-visual">
-                    <span></span>
-                    <div class="billet-stack"></div>
-                  </div>
-                  <h3>Válcovna</h3>
-                  <p>Nakládka sochorů na Res.</p>
-                </div>
-
-                <div class="flow-node flow-node-small" data-stop="scale" style="--x: 74%;">
-                  <div class="flow-node-visual flow-scale-visual">
-                    <span>kg</span>
-                  </div>
-                  <h3>Dynamická váha</h3>
-                  <p>Kontrola loženého vozu.</p>
-                </div>
-
-                <div class="flow-node" data-stop="transshipment" style="--x: 90%;">
-                  <div class="flow-node-visual flow-transshipment-visual">
-                    <span></span>
-                    <div class="flow-crane flow-portal-crane" data-crane="portal">
-                      <div class="crane-portal-left"></div>
-                      <div class="crane-portal-right"></div>
-                      <div class="crane-portal-beam"></div>
-                      <div class="crane-cable"></div>
-                      <div class="crane-hook"></div>
-                    </div>
-                  </div>
-                  <h3>Překladiště</h3>
-                  <p>Vykládka a návrat vozu zpět.</p>
-                </div>
-
-                <div class="flow-wagon eanos empty" id="flowWagon" aria-hidden="true">
-                  <div class="wagon-chassis">
-                    <span class="wheel wheel-left"></span>
-                    <span class="wheel wheel-right"></span>
-                  </div>
-                  <div class="wagon-body">
-                    <div class="wagon-load"></div>
-                    <span class="wagon-label">Eanos</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <h3 id="processTitle">Prázdný Eanos čeká na seřadišti.</h3>
+          <p id="processText">Jakmile se animace objeví na obrazovce, vůz vyrazí na šrotové pole.</p>
         </div>
+      </div>
 
-        <div class="flow-steps reveal">
-          <article class="flow-step-card">
-            <span>01</span>
-            <h3>Seřadiště</h3>
-            <p>Prázdný Eanos je připravený pro obsluhu šrotového pole.</p>
-          </article>
-          <article class="flow-step-card">
-            <span>02</span>
-            <h3>Šrotové pole</h3>
-            <p>Jeřáb naloží šrot a vůz pokračuje k peci.</p>
-          </article>
-          <article class="flow-step-card">
-            <span>03</span>
-            <h3>Elektrická pec</h3>
-            <p>Šrot se vyloží a vůz se připraví pro další přepravu.</p>
-          </article>
-          <article class="flow-step-card">
-            <span>04</span>
-            <h3>Válcovna</h3>
-            <p>Z Eanosu se stává Res a na vůz se naloží sochory.</p>
-          </article>
-          <article class="flow-step-card">
-            <span>05</span>
-            <h3>Dynamická váha</h3>
-            <p>Ložený Res projede přes kolejovou váhu.</p>
-          </article>
-          <article class="flow-step-card">
-            <span>06</span>
-            <h3>Překladiště</h3>
-            <p>Portálový jeřáb vyloží sochory do expedice.</p>
-          </article>
-          <article class="flow-step-card">
-            <span>07</span>
-            <h3>Návrat</h3>
-            <p>Prázdný vůz se vrací zpět na seřadiště k dalšímu oběhu.</p>
-          </article>
+      <div class="process-viewport reveal" id="processViewport">
+        <div class="process-canvas">
+          <svg class="process-svg" id="processSvg" viewBox="0 0 1600 650" role="img" aria-label="Animovaný provozní cyklus železáren">
+            <defs>
+              <linearGradient id="steelBuilding" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#343a40"/>
+                <stop offset="1" stop-color="#161a1e"/>
+              </linearGradient>
+              <linearGradient id="wagonRed" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#9d463c"/>
+                <stop offset="1" stop-color="#59251f"/>
+              </linearGradient>
+              <linearGradient id="groundGlow" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#d54a3c" stop-opacity="0"/>
+                <stop offset=".5" stop-color="#d54a3c" stop-opacity=".32"/>
+                <stop offset="1" stop-color="#d54a3c" stop-opacity="0"/>
+              </linearGradient>
+              <filter id="redGlow" x="-60%" y="-60%" width="220%" height="220%">
+                <feGaussianBlur stdDeviation="12"/>
+              </filter>
+            </defs>
+
+            <rect width="1600" height="650" fill="#0a0d10"/>
+            <path d="M0 470 H1600" stroke="#20262c" stroke-width="88"/>
+            <path d="M0 514 H1600" stroke="#07090b" stroke-width="78"/>
+            <g class="rail-bed">
+              <path d="M10 455 H1590"/>
+              <path d="M10 493 H1590"/>
+              <path d="M35 474 H1565" class="sleepers"/>
+            </g>
+            <rect x="0" y="433" width="1600" height="84" fill="url(#groundGlow)" opacity=".18"/>
+
+            <g class="facility yard-facility active" data-facility="yard" transform="translate(35 90)">
+              <text x="92" y="18" class="facility-kicker">SEŘADIŠTĚ</text>
+              <g class="yard-graphic">
+                <path d="M0 255 H225"/>
+                <path d="M0 285 H225"/>
+                <path d="M0 315 H225"/>
+                <path d="M0 345 H225"/>
+                <path d="M0 375 H225"/>
+                <path d="M145 255 L215 285" class="yard-switch"/>
+                <path d="M122 315 L205 345" class="yard-switch"/>
+                <rect x="22" y="175" width="104" height="58" rx="2" class="yard-building"/>
+                <rect x="38" y="189" width="16" height="23" class="window"/>
+                <rect x="67" y="189" width="16" height="23" class="window"/>
+                <rect x="96" y="189" width="16" height="23" class="window"/>
+              </g>
+            </g>
+
+            <g class="facility scrap-facility" data-facility="scrap" transform="translate(285 55)">
+              <text x="110" y="18" class="facility-kicker">ŠROTOVÉ POLE</text>
+              <g class="scrap-pile">
+                <path d="M24 356 L50 307 L74 326 L103 269 L132 307 L160 250 L194 296 L224 278 L262 356 Z"/>
+                <path d="M45 354 L68 329 L90 342 L116 303 L144 331 L170 289 L202 327 L238 311 L254 354 Z" class="scrap-highlight"/>
+              </g>
+              <g class="scrap-crane" id="scrapCrane">
+                <path d="M235 122 V350" class="crane-leg"/>
+                <path d="M235 139 H82" class="crane-boom"/>
+                <path d="M235 139 L188 101" class="crane-brace"/>
+                <circle cx="125" cy="139" r="7" class="crane-trolley"/>
+                <g class="scrap-hook" id="scrapHook">
+                  <path d="M125 146 V250" class="crane-rope"/>
+                  <path d="M110 250 Q125 270 140 250" class="crane-grab"/>
+                  <path d="M114 251 L106 266 M136 251 L144 266" class="crane-grab"/>
+                </g>
+              </g>
+              <g class="scrap-drop" id="scrapDrop">
+                <rect x="102" y="322" width="10" height="8" rx="2"/>
+                <rect x="118" y="310" width="12" height="7" rx="2"/>
+                <rect x="137" y="327" width="9" height="9" rx="2"/>
+                <rect x="151" y="314" width="13" height="7" rx="2"/>
+              </g>
+            </g>
+
+            <g class="facility furnace-facility" data-facility="furnace" transform="translate(565 72)">
+              <text x="112" y="18" class="facility-kicker">ELEKTRICKÁ PEC</text>
+              <g class="furnace-graphic">
+                <rect x="16" y="154" width="236" height="202" rx="3" fill="url(#steelBuilding)"/>
+                <path d="M42 154 L84 95 H205 L238 154" class="furnace-roof"/>
+                <rect x="60" y="207" width="148" height="112" rx="2" class="furnace-door"/>
+                <rect x="76" y="221" width="116" height="88" rx="2" class="furnace-mouth"/>
+                <rect x="86" y="54" width="24" height="72" class="chimney"/>
+                <rect x="140" y="40" width="27" height="86" class="chimney"/>
+                <rect x="194" y="58" width="23" height="68" class="chimney"/>
+                <ellipse cx="134" cy="281" rx="86" ry="38" class="furnace-glow-svg" id="furnaceGlow"/>
+                <path d="M104 294 C108 263 125 259 132 235 C143 257 153 268 158 294 Z" class="furnace-flame"/>
+              </g>
+            </g>
+
+            <g class="facility rolling-facility" data-facility="rolling" transform="translate(835 92)">
+              <text x="112" y="18" class="facility-kicker">VÁLCOVNA</text>
+              <g class="rolling-graphic">
+                <rect x="13" y="144" width="238" height="212" rx="3" fill="url(#steelBuilding)"/>
+                <path d="M13 144 L55 107 H251 V144 Z" class="rolling-roof"/>
+                <rect x="42" y="210" width="182" height="109" class="rolling-door"/>
+                <g class="rollers" transform="translate(55 273)">
+                  <circle cx="18" cy="18" r="18"/>
+                  <circle cx="65" cy="18" r="18"/>
+                  <circle cx="112" cy="18" r="18"/>
+                  <circle cx="159" cy="18" r="18"/>
+                </g>
+                <g class="billet-rack" id="billetRack" transform="translate(39 168)">
+                  <rect x="0" y="0" width="157" height="12" rx="2"/>
+                  <rect x="15" y="18" width="157" height="12" rx="2"/>
+                  <rect x="2" y="36" width="157" height="12" rx="2"/>
+                </g>
+              </g>
+            </g>
+
+            <g class="facility scale-facility" data-facility="scale" transform="translate(1105 225)">
+              <text x="75" y="18" class="facility-kicker">DYNAMICKÁ VÁHA</text>
+              <g class="scale-graphic">
+                <rect x="6" y="157" width="144" height="22" rx="2"/>
+                <path d="M26 157 V107 H130 V157"/>
+                <rect x="42" y="119" width="72" height="28" rx="2" class="scale-screen"/>
+                <text x="78" y="139" text-anchor="middle" class="scale-value" id="scaleValue">--.- t</text>
+              </g>
+            </g>
+
+            <g class="facility transshipment-facility" data-facility="transshipment" transform="translate(1285 48)">
+              <text x="122" y="18" class="facility-kicker">PŘEKLADIŠTĚ</text>
+              <g class="portal-crane" id="portalCrane">
+                <path d="M28 112 V361 M260 112 V361" class="portal-leg"/>
+                <path d="M16 112 H274" class="portal-beam"/>
+                <path d="M48 137 H242" class="portal-runway"/>
+                <g class="portal-hook" id="portalHook">
+                  <rect x="135" y="130" width="22" height="13" rx="2" class="portal-trolley"/>
+                  <path d="M146 143 V257" class="crane-rope"/>
+                  <path d="M128 257 H164" class="spreader"/>
+                </g>
+              </g>
+              <g class="transshipment-stack" id="transshipmentStack" transform="translate(56 318)">
+                <rect x="0" y="0" width="152" height="12" rx="2"/>
+                <rect x="18" y="18" width="152" height="12" rx="2"/>
+                <rect x="2" y="36" width="152" height="12" rx="2"/>
+              </g>
+            </g>
+
+            <g class="wagon-svg is-eanos is-empty" id="flowWagonSvg" transform="translate(72 396)">
+              <ellipse cx="82" cy="85" rx="91" ry="14" class="wagon-shadow"/>
+              <g class="wagon-chassis-svg">
+                <rect x="8" y="61" width="150" height="8" rx="2"/>
+                <circle cx="38" cy="76" r="14"/>
+                <circle cx="126" cy="76" r="14"/>
+                <circle cx="38" cy="76" r="6" class="wheel-hub"/>
+                <circle cx="126" cy="76" r="6" class="wheel-hub"/>
+              </g>
+              <g class="wagon-body-swap">
+                <g class="wagon-eanos-body">
+                  <path d="M15 10 H151 L142 60 H24 Z" fill="url(#wagonRed)"/>
+                  <path d="M28 15 V56 M53 15 V56 M78 15 V56 M103 15 V56 M128 15 V56" class="wagon-ribs"/>
+                  <path d="M15 10 H151" class="wagon-top-edge"/>
+                </g>
+                <g class="wagon-res-body">
+                  <rect x="13" y="48" width="144" height="12" rx="2" fill="url(#wagonRed)"/>
+                  <path d="M22 32 V50 M148 32 V50" class="wagon-stakes"/>
+                </g>
+                <g class="wagon-scrap-load">
+                  <path d="M28 47 L34 30 L45 38 L55 22 L68 34 L82 18 L96 34 L109 25 L123 38 L140 28 L142 50 Z"/>
+                </g>
+                <g class="wagon-billet-load">
+                  <rect x="27" y="29" width="111" height="8" rx="1"/>
+                  <rect x="35" y="19" width="111" height="8" rx="1"/>
+                  <rect x="22" y="39" width="111" height="8" rx="1"/>
+                </g>
+              </g>
+              <text x="82" y="57" text-anchor="middle" class="wagon-name" id="wagonName">Eanos</text>
+            </g>
+          </svg>
         </div>
+      </div>
+
+      <div class="container process-legend reveal">
+        <div class="process-legend-item active" data-legend="yard"><span>01</span><strong>Seřadiště</strong></div>
+        <div class="process-legend-item" data-legend="scrap"><span>02</span><strong>Šrotové pole</strong></div>
+        <div class="process-legend-item" data-legend="furnace"><span>03</span><strong>Elektrická pec</strong></div>
+        <div class="process-legend-item" data-legend="rolling"><span>04</span><strong>Válcovna</strong></div>
+        <div class="process-legend-item" data-legend="scale"><span>05</span><strong>Dynamická váha</strong></div>
+        <div class="process-legend-item" data-legend="transshipment"><span>06</span><strong>Překladiště</strong></div>
+        <div class="process-legend-item" data-legend="return"><span>07</span><strong>Návrat</strong></div>
       </div>
     </section>
 
     <section class="chapter-block container">
       <div class="chapter-grid">
         <div class="chapter-content reveal">
-          <p class="eyebrow">PROVOZ JAKO ZÁKLAD PROJEKTU</p>
-          <h2 class="section-title">Kolejiště postavené na návaznosti jednotlivých provozů.</h2>
+          <p class="eyebrow">MYŠLENKA</p>
+          <h2 class="section-title">Vlečka postavená na provozu.</h2>
           <div class="story-copy">
             <p>
-              Projekt Železáren nestojí na náhodném posunu, ale na logické návaznosti jednotlivých míst v areálu. Šrotové pole, elektrická pec, válcovna, dynamická kolejová váha i překladiště na sebe přímo navazují a dávají každému vozu konkrétní úkol.
+              Projekt vychází ze skutečných hutních vleček a hlavní část provozu tvoří vnitropodniková doprava. Jednotlivé provozy jsou navržené tak, aby na sebe přepravy navazovaly a každý vůz měl konkrétní úkol.
             </p>
             <p>
-              Díky tomu může i krátká obsluha vytvořit smysluplný provozní příběh: od suroviny přes výrobu až po expedici hotového výrobku. Právě takové oběhy mají tvořit hlavní náplň provozu na celém kolejišti.
+              Animovaný oběh nahoře ukazuje princip, na kterém má kolejiště fungovat: surovina přijede k výrobě, hotový polotovar pokračuje do expedice a prázdný vůz se vrací na seřadiště pro další práci.
             </p>
           </div>
         </div>
