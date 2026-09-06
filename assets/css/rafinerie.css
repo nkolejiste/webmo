@@ -59,9 +59,9 @@ button { font: inherit; }
 .placeholder-box { min-height: 360px; border: 1px dashed rgba(255,255,255,.22); display: grid; place-items: center; text-align: center; padding: 35px; background: linear-gradient(135deg, rgba(213,74,60,.06), transparent 46%); }
 .placeholder-box p { max-width: 600px; color: var(--muted); }
 
-.next-page-panel { background: var(--accent); color: white; padding: 78px 0; }
-.next-page-grid { display: flex; justify-content: space-between; gap: 30px; align-items: center; }
-.next-page-panel .eyebrow { color: rgba(255,255,255,.7); }
+.back-panel { background: var(--accent); color: white; padding: 78px 0; }
+.back-grid { display: flex; justify-content: space-between; gap: 30px; align-items: center; }
+.back-panel .eyebrow { color: rgba(255,255,255,.7); }
 .circle-link { width: 88px; height: 88px; border: 1px solid rgba(255,255,255,.65); border-radius: 50%; display: grid; place-items: center; font-size: 28px; transition: .25s ease; }
 .circle-link:hover { background: white; color: var(--accent); }
 
@@ -95,7 +95,7 @@ button { font: inherit; }
   .page-title { font-size: 68px; }
   .page-intro { font-size: 17px; }
   .placeholder-panel { padding: 82px 0 100px; }
-  .next-page-grid { gap: 24px; }
+  .back-grid { gap: 24px; }
   .circle-link { width: 68px; height: 68px; flex: 0 0 auto; }
   .footer-grid { grid-template-columns: 1fr; }
   .copyright { grid-column: auto; margin-top: 10px; }

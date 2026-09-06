@@ -24,47 +24,170 @@
           <h1 class="page-title reveal">Železárny</h1>
         </div>
         <p class="page-intro reveal">
-          Myšlenka a princip celého projektu Železáren.
+          Typický provozní cyklus od prázdného vozu se šrotem až po expedici hotových sochorů.
         </p>
       </div>
     </section>
 
-    <section class="chapter-block container">
-      <div class="chapter-grid">
-        <div class="chapter-content reveal">
-          <p class="eyebrow">MYŠLENKA</p>
-          <h2 class="section-title">Vlečka postavená na provozu.</h2>
-          <div class="story-copy">
-            <p>
-              Projekt vychází ze skutečných hutních vleček, především z prostředí Železiarní Podbrezová, doplněného o prvky 
-              inspirované Třincem a Košicemi. Hlavní část provozu tvoří vnitropodniková doprava – rozřazování vozů a jejich přesun mezi jednotlivými částmi železáren.
-            </p>
-            <p>
-              Každý vůz má svůj účel i konkrétní náklad. Šrot směřuje z šrotového pole k elektrické peci, hotové výrobky z expedice na překladiště 
-              a další vozy zajišťují zásobování jednotlivých provozů. Posun tak nevzniká náhodně, ale podle skutečné návaznosti provozu v areálu.
+    <section class="flow-section">
+      <div class="container">
+        <div class="flow-heading reveal">
+          <div>
+            <p class="eyebrow">MODEL PROVOZU</p>
+            <h2 class="section-title">Jeden vůz, celý hutní oběh.</h2>
+          </div>
+          <p class="flow-heading-copy">
+            Animace ukazuje jeden z typických oběhů na kolejišti: prázdný Eanos odjíždí ze seřadiště na šrotové pole, po naložení zamíří k elektrické peci, poté se změní na Res pro expedici sochorů a přes dynamickou kolejovou váhu dojede až na překladiště.
+          </p>
+        </div>
+
+        <div class="flow-panel reveal">
+          <div class="flow-status-card">
+            <div class="flow-status-meta">
+              <span id="flowStatusCounter">1 / 7</span>
+              <span id="flowStatusMode">EA NOS / PRÁZDNÝ</span>
+            </div>
+            <h3 id="flowStatusTitle">Prázdný vůz Eanos odjíždí ze seřadiště.</h3>
+            <p id="flowStatusText">
+              Vůz je připravený na seřadišti a míří na šrotové pole, kde bude naložen hutním šrotem.
             </p>
           </div>
+
+          <div class="flow-scene-shell">
+            <div class="flow-scene-wrap">
+              <div class="flow-scene" id="flowScene">
+                <div class="flow-track"></div>
+                <div class="flow-track-return"></div>
+
+                <div class="flow-node active" data-stop="yard" style="--x: 8%;">
+                  <div class="flow-node-visual flow-yard-visual">
+                    <span></span><span></span><span></span>
+                  </div>
+                  <h3>Seřadiště</h3>
+                  <p>Výchozí a cílový bod oběhu.</p>
+                </div>
+
+                <div class="flow-node" data-stop="scrap" style="--x: 25%;">
+                  <div class="flow-node-visual flow-scrap-visual">
+                    <span></span>
+                    <div class="flow-crane flow-scrap-crane" data-crane="scrap">
+                      <div class="crane-mast"></div>
+                      <div class="crane-arm"></div>
+                      <div class="crane-cable"></div>
+                      <div class="crane-hook"></div>
+                    </div>
+                  </div>
+                  <h3>Šrotové pole</h3>
+                  <p>Nakládka šrotu do Eanosu.</p>
+                </div>
+
+                <div class="flow-node" data-stop="furnace" style="--x: 45%;">
+                  <div class="flow-node-visual flow-furnace-visual">
+                    <span></span><span></span>
+                    <div class="furnace-glow"></div>
+                  </div>
+                  <h3>Elektrická pec</h3>
+                  <p>Vykládka šrotu a tavba.</p>
+                </div>
+
+                <div class="flow-node" data-stop="rolling" style="--x: 60%;">
+                  <div class="flow-node-visual flow-rolling-visual">
+                    <span></span>
+                    <div class="billet-stack"></div>
+                  </div>
+                  <h3>Válcovna</h3>
+                  <p>Nakládka sochorů na Res.</p>
+                </div>
+
+                <div class="flow-node flow-node-small" data-stop="scale" style="--x: 74%;">
+                  <div class="flow-node-visual flow-scale-visual">
+                    <span>kg</span>
+                  </div>
+                  <h3>Dynamická váha</h3>
+                  <p>Kontrola loženého vozu.</p>
+                </div>
+
+                <div class="flow-node" data-stop="transshipment" style="--x: 90%;">
+                  <div class="flow-node-visual flow-transshipment-visual">
+                    <span></span>
+                    <div class="flow-crane flow-portal-crane" data-crane="portal">
+                      <div class="crane-portal-left"></div>
+                      <div class="crane-portal-right"></div>
+                      <div class="crane-portal-beam"></div>
+                      <div class="crane-cable"></div>
+                      <div class="crane-hook"></div>
+                    </div>
+                  </div>
+                  <h3>Překladiště</h3>
+                  <p>Vykládka a návrat vozu zpět.</p>
+                </div>
+
+                <div class="flow-wagon eanos empty" id="flowWagon" aria-hidden="true">
+                  <div class="wagon-chassis">
+                    <span class="wheel wheel-left"></span>
+                    <span class="wheel wheel-right"></span>
+                  </div>
+                  <div class="wagon-body">
+                    <div class="wagon-load"></div>
+                    <span class="wagon-label">Eanos</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="chapter-media reveal">
-          <img src="../assets/images/zelezarny/uvodni-foto.jpg" alt="Celkový pohled na modulové kolejiště Železárny">
+
+        <div class="flow-steps reveal">
+          <article class="flow-step-card">
+            <span>01</span>
+            <h3>Seřadiště</h3>
+            <p>Prázdný Eanos je připravený pro obsluhu šrotového pole.</p>
+          </article>
+          <article class="flow-step-card">
+            <span>02</span>
+            <h3>Šrotové pole</h3>
+            <p>Jeřáb naloží šrot a vůz pokračuje k peci.</p>
+          </article>
+          <article class="flow-step-card">
+            <span>03</span>
+            <h3>Elektrická pec</h3>
+            <p>Šrot se vyloží a vůz se připraví pro další přepravu.</p>
+          </article>
+          <article class="flow-step-card">
+            <span>04</span>
+            <h3>Válcovna</h3>
+            <p>Z Eanosu se stává Res a na vůz se naloží sochory.</p>
+          </article>
+          <article class="flow-step-card">
+            <span>05</span>
+            <h3>Dynamická váha</h3>
+            <p>Ložený Res projede přes kolejovou váhu.</p>
+          </article>
+          <article class="flow-step-card">
+            <span>06</span>
+            <h3>Překladiště</h3>
+            <p>Portálový jeřáb vyloží sochory do expedice.</p>
+          </article>
+          <article class="flow-step-card">
+            <span>07</span>
+            <h3>Návrat</h3>
+            <p>Prázdný vůz se vrací zpět na seřadiště k dalšímu oběhu.</p>
+          </article>
         </div>
       </div>
     </section>
-    
+
     <section class="chapter-block container">
       <div class="chapter-grid">
         <div class="chapter-content reveal">
-          <p class="eyebrow">ZÁKLAD AREÁLU</p>
-          <h2 class="section-title">Všechno začíná na seřadišti.</h2>
+          <p class="eyebrow">PROVOZ JAKO ZÁKLAD PROJEKTU</p>
+          <h2 class="section-title">Kolejiště postavené na návaznosti jednotlivých provozů.</h2>
           <div class="story-copy">
             <p>
-              První dva moduly tvoří provozní základ celých železáren. Jejich středem je pětikolejné seřadiště, kde se vozy odstavují, rozřazují a 
-              připravují pro další přesun po areálu. Jedna z kolejí slouží překladišti hotových výrobků, další je vybavena statickou kolejovou 
-              váhou a průjezdná kolej prochází přes dynamickou kolejovou váhu. Zbývající dvě koleje slouží především k odstavování a řazení vozů.
+              Projekt Železáren nestojí na náhodném posunu, ale na logické návaznosti jednotlivých míst v areálu. Šrotové pole, elektrická pec, válcovna, dynamická kolejová váha i překladiště na sebe přímo navazují a dávají každému vozu konkrétní úkol.
             </p>
             <p>
-              Ze seřadiště se kolejiště dále větví k elektrické peci, šrotovému poli a skladu sypkých materiálů a technických plynů. Právě 
-              odsud se vozy rozdělují mezi jednotlivé provozy a po dokončení obsluhy se znovu vracejí k dalšímu řazení.
+              Díky tomu může i krátká obsluha vytvořit smysluplný provozní příběh: od suroviny přes výrobu až po expedici hotového výrobku. Právě takové oběhy mají tvořit hlavní náplň provozu na celém kolejišti.
             </p>
           </div>
         </div>
@@ -74,139 +197,6 @@
       </div>
     </section>
 
-    <section class="chapter-block container">
-      <div class="chapter-grid">
-        <div class="chapter-content reveal">
-          <p class="eyebrow">VNITROPODNIKOVÁ DOPRAVA</p>
-          <h2 class="section-title">Hlavní provoz začíná uvnitř areálu.</h2>
-          <div class="story-copy">
-            <p>
-              Příjezd a odjezd vlaků z veřejné železniční sítě je na kolejišti pouze naznačený. Hlavní část provozu se odehrává přímo 
-              uvnitř železáren, kde se vozy průběžně přesouvají mezi seřadištěm a jednotlivými výrobními, skladovacími a expedičními provozy.
-            </p>
-            <p>
-              Seřadiště přitom funguje jako hlavní uzel celého areálu. Vozy se zde odstavují a řadí pro další obsluhu, zatímco část přeprav probíhá přímo mezi jednotlivými 
-              provozy – například mezi šrotovým polem a elektrickou pecí nebo mezi expedicí hotových výrobků a překladištěm. Provoz tak 
-              vychází především z potřeb samotného závodu, nikoli z pouhého projíždění vlaků kolejištěm.
-            </p>
-          </div>
-        </div>
-        <div class="chapter-media reveal">
-          <img src="../assets/images/zelezarny/uvodni-foto.jpg" alt="Celkový pohled na modulové kolejiště Železárny">
-        </div>
-      </div>
-    </section>
-
-    <section class="chapter-block container">
-      <div class="chapter-grid">
-        <div class="chapter-content reveal">
-          <p class="eyebrow">POSUNOVACÍ ZÁLOHY</p>
-          <h2 class="section-title">Každá část areálu má svou lokomotivu.</h2>
-          <div class="story-copy">
-            <p>
-              Lokomotivy jsou rozdělené do několika posunovacích záloh, z nichž každá má na starost konkrétní část provozu. Jedna zajišťuje přepravu vozů mezi šrotovým polem a elektrickou pecí, 
-              další obsluhuje expedici hotových výrobků a překladiště a samostatná záloha se věnuje rozřazování a přestavování vozů na seřadišti.
-            </p>
-            <p>
-              Rozdělení lokomotiv podle jednotlivých úkolů umožňuje provozovat více částí železáren současně a zároveň přibližuje 
-              kolejiště způsobu, jakým je posun organizován na skutečných průmyslových vlečkách.
-            </p>
-          </div>
-        </div>
-        <div class="chapter-media reveal">
-          <img src="../assets/images/zelezarny/uvodni-foto.jpg" alt="Celkový pohled na modulové kolejiště Železárny">
-        </div>
-      </div>
-    </section>
-    
-    <section class="chapter-block container">
-      <div class="chapter-grid">
-        <div class="chapter-content reveal">
-          <p class="eyebrow">VOZY A NÁKLADY</p>
-          <h2 class="section-title">Každý náklad potřebuje správný vůz.</h2>
-          <div class="story-copy">
-            <p>
-              Vozový park odpovídá přepravám běžným v hutních závodech. Otevřené vozy Eas a Tams slouží především pro šrot a sypké materiály, plošinové vozy Res a Samms 
-              pro těžké výrobky a hutní materiál a kontejnerové vozy Sgnss pro přepravu strusky. Součástí provozu jsou cisternové vozy Zags určené například pro technické plyny.
-            </p>
-            <p>
-              Jednotlivé vozy nejsou v areálu rozmístěny náhodně. Každý typ má přiřazenou odpovídající komoditu a konkrétní místo nakládky, vykládky nebo odstavení,
-              takže skladba vozů přímo vychází z provozu jednotlivých částí železáren.
-            </p>
-          </div>
-        </div>
-        <div class="chapter-media reveal">
-          <img src="../assets/images/zelezarny/uvodni-foto.jpg" alt="Celkový pohled na modulové kolejiště Železárny">
-        </div>
-      </div>
-    </section>
-
-    <section class="chapter-block container">
-      <div class="chapter-grid">
-        <div class="chapter-content reveal">
-          <p class="eyebrow">MODULARITA</p>
-          <h2 class="section-title">Kolejiště roste s dostupným prostorem.</h2>
-          <div class="story-copy">
-            <p>
-              Základ železáren tvoří první dva moduly se seřadištěm a hlavními provozy. Podle dostupného prostoru lze kolejiště 
-              postupně rozšiřovat o další moduly, které na sebe navazují v pevně daném pořadí a přidávají další části výrobního areálu.
-            </p>
-            <p>
-              Jedním z rozšiřujících prvků je propojovací modul s elektrickou pecí, válcovnou a expedicí hotových výrobků. Zároveň umožňuje navázat na další kolejiště a začlenit vlečku 
-              do větší sestavy. I při menším počtu modulů ale zůstává hlavní náplní provozu posun a obsluha jednotlivých částí železáren.
-            </p>
-          </div>
-        </div>
-        <div class="chapter-media reveal">
-          <img src="../assets/images/zelezarny/uvodni-foto.jpg" alt="Celkový pohled na modulové kolejiště Železárny">
-        </div>
-      </div>
-    </section>
-
-    <section class="chapter-block container">
-      <div class="chapter-grid">
-        <div class="chapter-content reveal">
-          <p class="eyebrow">OBDOBÍ</p>
-          <h2 class="section-title">Jeden areál napříč desetiletími.</h2>
-          <div class="story-copy">
-            <p>
-              Kolejiště není pevně zasazené do jediného období. Výměnou lokomotiv, vozů a dalších detailů lze 
-              provoz železáren přizpůsobit období přibližně od 80. let 20. století až po současnost.
-            </p>
-            <p>
-              Samotné uspořádání areálu přitom zůstává stejné, mění se především vozový park a charakter provozu. Na 
-              jednom kolejišti tak mohou vznikat sestavy odpovídající staršímu průmyslovému provozu i dnešní podobě železniční dopravy v hutních závodech.
-            </p>
-          </div>
-        </div>
-        <div class="chapter-media reveal">
-          <img src="../assets/images/zelezarny/uvodni-foto.jpg" alt="Celkový pohled na modulové kolejiště Železárny">
-        </div>
-      </div>
-    </section>
-
-    <section class="chapter-block container">
-      <div class="chapter-grid">
-        <div class="chapter-content reveal">
-          <p class="eyebrow">PROMĚNLIVÁ PODOBA</p>
-          <h2 class="section-title">Stejné koleje, jiný průmysl.</h2>
-          <div class="story-copy">
-            <p>
-              Budovy a část technologického vybavení jsou na modulech uchycené pomocí magnetů. Jednotlivé objekty je tak 
-              možné vyměnit, aniž by bylo nutné měnit samotné kolejové uspořádání nebo konstrukci modulů.
-            </p>
-            <p>
-              Železárny představují hlavní podobu kolejiště, stejný základ ale může po výměně budov vytvořit například rafinerii nebo jiný 
-              rozsáhlý průmyslový areál. Koleje zůstávají stejné, mění se jejich účel, obsluhované provozy, používané vozy a charakter celého provozu.
-            </p>
-          </div>
-        </div>
-        <div class="chapter-media reveal">
-          <img src="../assets/images/zelezarny/uvodni-foto.jpg" alt="Celkový pohled na modulové kolejiště Železárny">
-        </div>
-      </div>
-    </section>
-    
     <section class="next-page-panel">
       <div class="container next-page-grid">
         <div>
@@ -229,11 +219,8 @@
           <span class="brand-mark"></span>
           <span>ŽELEZÁRNY</span>
         </div>
-        <!-- EDITACE: popis v patičce -->
         <p>Digitální prezentace modulového kolejiště Železáren.</p>
       </div>
-
-      <!-- EDITACE: copyright v patičce -->
       <p class="copyright">© 2026 N kolejiště. Všechna práva vyhrazena.</p>
     </div>
   </footer>
