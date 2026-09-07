@@ -1,7 +1,6 @@
 :root {
   --bg: #080a0c;
-  --panel: #15191e;
-  --text: #f1f1ed;
+--text: #f1f1ed;
   --muted: #9ca2a8;
   --line: rgba(255, 255, 255, 0.13);
   --accent: #d54a3c;
@@ -69,9 +68,9 @@ button { font: inherit; }
 .footer-grid { display: grid; grid-template-columns: 1fr auto; gap: 50px; }
 .footer-brand { margin-bottom: 18px; }
 .site-footer p { color: var(--muted); }
-.footer-nav { display: flex; gap: 28px; align-items: start; flex-wrap: wrap; }
-.footer-nav a { color: var(--muted); }
-.footer-nav a:hover { color: var(--text); }
+
+
+
 .copyright { grid-column: 1 / -1; margin-top: 45px; font-size: 12px; }
 
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }

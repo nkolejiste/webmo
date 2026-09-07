@@ -128,6 +128,34 @@ function initZelezarnyInteractions() {
   }
 
   // Lightbox fotografií – aktivuje se jen na stránkách, kde je jeho HTML.
+  const detailDialog = document.getElementById("chapterDetailDialog");
+  const detailClose = detailDialog?.querySelector(".chapter-detail-close");
+  const detailPanels = detailDialog ? [...detailDialog.querySelectorAll(".chapter-detail-panel")] : [];
+  let detailOpener = null;
+
+  document.querySelectorAll(".chapter-detail-link").forEach(button => {
+    button.addEventListener("click", () => {
+      if (!detailDialog) return;
+      const target = button.dataset.detail;
+      detailPanels.forEach(panel => panel.classList.toggle("active", panel.dataset.detailPanel === target));
+      detailOpener = button;
+      detailDialog.showModal();
+      detailDialog.querySelector(".chapter-detail-shell")?.scrollTo({ top: 0 });
+      detailClose?.focus();
+    });
+  });
+
+  const closeDetailDialog = () => {
+    if (!detailDialog?.open) return;
+    detailDialog.close();
+    detailOpener?.focus();
+  };
+
+  detailClose?.addEventListener("click", closeDetailDialog);
+  detailDialog?.addEventListener("click", event => {
+    if (event.target === detailDialog) closeDetailDialog();
+  });
+
   const lightboxModal = document.getElementById("lightboxModal");
   const lightboxImg = document.getElementById("lightboxImg");
   const closeBtn = document.querySelector(".lightbox-close");
