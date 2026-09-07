@@ -669,27 +669,33 @@ section[id] {
 
 
 .chapter-detail-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
   margin-top: 22px;
-  padding: 0 0 8px;
-  border: 0;
-  border-bottom: 1px solid rgba(255,255,255,.35);
-  background: transparent;
   color: var(--text);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: .14em;
+  letter-spacing: .12em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: border-color .25s ease, color .25s ease;
+  transition: color .25s ease, gap .25s ease;
 }
 
-.chapter-detail-link::after {
-  content: " ↗";
+.chapter-detail-link span {
   color: var(--accent);
+  font-size: 16px;
+  line-height: 1;
+  transition: transform .25s ease;
 }
 
 .chapter-detail-link:hover {
-  border-color: var(--accent);
+  color: white;
+  gap: 15px;
+}
+
+.chapter-detail-link:hover span {
+  transform: translate(2px, -2px);
 }
 
 .chapter-detail-dialog {
@@ -739,10 +745,6 @@ section[id] {
 }
 
 .chapter-detail-panel {
-  display: none;
-}
-
-.chapter-detail-panel.active {
   display: block;
 }
 

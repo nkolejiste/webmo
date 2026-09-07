@@ -128,32 +128,42 @@ function initZelezarnyInteractions() {
   }
 
   // Lightbox fotografií – aktivuje se jen na stránkách, kde je jeho HTML.
-  const detailDialog = document.getElementById("chapterDetailDialog");
-  const detailClose = detailDialog?.querySelector(".chapter-detail-close");
-  const detailPanels = detailDialog ? [...detailDialog.querySelectorAll(".chapter-detail-panel")] : [];
   let detailOpener = null;
 
-  document.querySelectorAll(".chapter-detail-link").forEach(button => {
-    button.addEventListener("click", () => {
-      if (!detailDialog) return;
-      const target = button.dataset.detail;
-      detailPanels.forEach(panel => panel.classList.toggle("active", panel.dataset.detailPanel === target));
-      detailOpener = button;
-      detailDialog.showModal();
+  document.querySelectorAll(".chapter-detail-link").forEach(link => {
+    link.addEventListener("click", event => {
+      event.preventDefault();
+      const target = link.getAttribute("href");
+      if (!target) return;
+      const detailDialog = document.querySelector(target);
+      if (!(detailDialog instanceof HTMLDialogElement)) return;
+      detailOpener = link;
+      if (!detailDialog.open) detailDialog.showModal();
       detailDialog.querySelector(".chapter-detail-shell")?.scrollTo({ top: 0 });
-      detailClose?.focus();
+      detailDialog.querySelector(".chapter-detail-close")?.focus();
     });
   });
 
-  const closeDetailDialog = () => {
-    if (!detailDialog?.open) return;
-    detailDialog.close();
-    detailOpener?.focus();
-  };
+  document.querySelectorAll(".chapter-detail-dialog").forEach(detailDialog => {
+    const detailClose = detailDialog.querySelector(".chapter-detail-close");
 
-  detailClose?.addEventListener("click", closeDetailDialog);
-  detailDialog?.addEventListener("click", event => {
-    if (event.target === detailDialog) closeDetailDialog();
+    const closeDetailDialog = () => {
+      if (!detailDialog.open) return;
+      detailDialog.close();
+    };
+
+    detailClose?.addEventListener("click", closeDetailDialog);
+
+    detailDialog.addEventListener("click", event => {
+      if (event.target !== detailDialog) return;
+      const rect = detailDialog.getBoundingClientRect();
+      const outside = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
+      if (outside) closeDetailDialog();
+    });
+
+    detailDialog.addEventListener("close", () => {
+      detailOpener?.focus();
+    });
   });
 
   const lightboxModal = document.getElementById("lightboxModal");
