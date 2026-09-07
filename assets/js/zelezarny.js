@@ -7,15 +7,21 @@
    LAYOUT – HLAVIČKA A MENU
 ========================================================= */
 
+function getWebRoot() {
+  const script = [...document.scripts].find(item => item.src.endsWith("/assets/js/zelezarny.js"));
+  return script ? new URL("../../", script.src) : new URL("../", window.location.href);
+}
+
 function renderZelezarnyHeader() {
   const header = document.getElementById("siteHeader");
   if (!header) return;
 
   const activePage = document.body.dataset.page;
+  const webRoot = getWebRoot();
   const navItems = [
-    { href: "index.html", label: "Úvod", page: "zelezarny-home" },
-    { href: "projekt.html", label: "Projekt", page: "zelezarny-projekt" },
-    { href: "stavba.html", label: "Stavba", page: "zelezarny-stavba" },
+    { href: new URL("zelezarny/index.html", webRoot).href, label: "Úvod", page: "zelezarny-home" },
+    { href: new URL("zelezarny/projekt.html", webRoot).href, label: "Projekt", page: "zelezarny-projekt" },
+    { href: new URL("zelezarny/stavba.html", webRoot).href, label: "Stavba", page: "zelezarny-stavba" },
   ];
 
   const links = navItems.map(item => {
@@ -24,7 +30,7 @@ function renderZelezarnyHeader() {
   }).join("\n      ");
 
   header.innerHTML = `
-    <a class="brand" href="index.html" aria-label="Železárny – úvodní stránka">
+    <a class="brand" href="${new URL("zelezarny/index.html", webRoot).href}" aria-label="Železárny – úvodní stránka">
       <span class="brand-mark"></span>
       <span>ŽELEZÁRNY</span>
     </a>

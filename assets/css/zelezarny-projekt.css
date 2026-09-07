@@ -1,0 +1,231 @@
+.page-hero-image {
+  position: relative;
+  overflow: hidden;
+  background: #080a0c;
+}
+
+.page-hero-media,
+.page-hero-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.page-hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.03);
+}
+
+.page-hero-overlay {
+  background:
+    linear-gradient(90deg, rgba(5,7,9,.88) 0%, rgba(5,7,9,.58) 45%, rgba(5,7,9,.24) 100%),
+    linear-gradient(180deg, rgba(5,7,9,.12) 0%, rgba(5,7,9,.68) 100%);
+}
+
+.page-hero-image .page-hero-grid {
+  position: relative;
+  z-index: 1;
+}
+
+.page-hero-image .page-intro {
+  color: rgba(255,255,255,.76);
+}
+
+.chapter-detail-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 22px;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color .25s ease, gap .25s ease;
+}
+
+.chapter-detail-link span {
+  color: var(--accent);
+  font-size: 16px;
+  line-height: 1;
+  transition: transform .25s ease;
+}
+
+.chapter-detail-link:hover {
+  color: white;
+  gap: 15px;
+}
+
+.chapter-detail-link:hover span {
+  transform: translate(2px, -2px);
+}
+
+.chapter-detail-dialog {
+  width: min(1180px, calc(100% - 38px));
+  max-height: calc(100dvh - 38px);
+  margin: auto;
+  padding: 0;
+  border: 1px solid rgba(255,255,255,.13);
+  background: #0b0e11;
+  color: var(--text);
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
+
+.chapter-detail-dialog::backdrop {
+  background: rgba(0,0,0,.82);
+  backdrop-filter: blur(10px);
+}
+
+.chapter-detail-shell {
+  position: relative;
+  max-height: calc(100dvh - 38px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  padding: 72px 58px 62px;
+}
+
+.chapter-detail-close {
+  position: sticky;
+  z-index: 3;
+  top: 0;
+  float: right;
+  width: 48px;
+  height: 48px;
+  margin: -48px -34px 0 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: rgba(8,10,12,.84);
+  color: var(--text);
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color .25s ease, background .25s ease;
+}
+
+.chapter-detail-close:hover {
+  border-color: var(--accent);
+  background: rgba(213,74,60,.12);
+}
+
+.chapter-detail-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.chapter-detail-heading {
+  order: 1;
+  display: block;
+  padding-bottom: 30px;
+  border-bottom: 1px solid var(--line);
+}
+
+.chapter-detail-heading .section-title {
+  max-width: 820px;
+  font-size: clamp(44px, 5.5vw, 78px);
+}
+
+.chapter-detail-intro {
+  width: 100%;
+  margin: 28px 0 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+.chapter-detail-intro:empty { display: none; }
+
+.chapter-detail-copy {
+  order: 2;
+  display: block;
+  width: 100%;
+  padding-top: 34px;
+}
+
+.chapter-detail-copy p {
+  width: 100%;
+  margin: 0 0 20px;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+.chapter-detail-copy p:last-child { margin-bottom: 0; }
+.chapter-detail-copy p:empty { display: none; }
+
+.chapter-detail-gallery {
+  order: 3;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 44px;
+  margin-bottom: 0;
+}
+
+.chapter-detail-gallery img,
+.chapter-detail-gallery img:first-child,
+.chapter-detail-gallery img:nth-child(2),
+.chapter-detail-gallery img:nth-child(3) {
+  width: 100%;
+  height: 250px;
+  grid-column: auto;
+  grid-row: auto;
+  object-fit: cover;
+  cursor: zoom-in;
+}
+
+@media (max-width: 900px) {
+  .chapter-detail-shell { padding: 64px 30px 44px; }
+  .chapter-detail-close { margin-right: -12px; }
+
+  .chapter-detail-gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .chapter-detail-gallery img,
+  .chapter-detail-gallery img:first-child,
+  .chapter-detail-gallery img:nth-child(2),
+  .chapter-detail-gallery img:nth-child(3) {
+    height: 190px;
+  }
+}
+
+@media (max-width: 640px) {
+  .chapter-detail-dialog {
+    width: calc(100% - 16px);
+    max-height: calc(100dvh - 16px);
+  }
+
+  .chapter-detail-shell {
+    max-height: calc(100dvh - 16px);
+    padding: 58px 18px 32px;
+  }
+
+  .chapter-detail-close {
+    width: 44px;
+    height: 44px;
+    margin: -44px 0 0 0;
+  }
+
+  .chapter-detail-heading .section-title { font-size: 46px; }
+
+  .chapter-detail-intro,
+  .chapter-detail-copy p { font-size: 16px; }
+
+  .chapter-detail-gallery {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 32px;
+  }
+
+  .chapter-detail-gallery img,
+  .chapter-detail-gallery img:first-child,
+  .chapter-detail-gallery img:nth-child(2),
+  .chapter-detail-gallery img:nth-child(3) {
+    height: 230px;
+  }
+}

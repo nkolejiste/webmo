@@ -7,12 +7,19 @@
    LAYOUT – HLAVIČKA A MENU
 ========================================================= */
 
+function getWebRoot() {
+  const script = [...document.scripts].find(item => item.src.endsWith("/assets/js/rafinerie.js"));
+  return script ? new URL("../../", script.src) : new URL("../", window.location.href);
+}
+
 function renderRafinerieHeader() {
   const header = document.getElementById("siteHeader");
   if (!header) return;
 
+  const webRoot = getWebRoot();
+
   header.innerHTML = `
-    <a class="brand" href="index.html" aria-label="Rafinerie – úvodní stránka">
+    <a class="brand" href="${new URL("rafinerie/index.html", webRoot).href}" aria-label="Rafinerie – úvodní stránka">
       <span class="brand-mark"></span>
       <span>RAFINERIE</span>
     </a>
@@ -22,7 +29,7 @@ function renderRafinerieHeader() {
     </button>
 
     <nav class="main-nav" id="mainNav" aria-label="Navigace Rafinerie">
-      <a class="active" aria-current="page" href="index.html">Rafinerie</a>
+      <a class="active" aria-current="page" href="${new URL("rafinerie/index.html", webRoot).href}">Rafinerie</a>
     </nav>`;
 }
 
