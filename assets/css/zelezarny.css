@@ -625,12 +625,12 @@ section[id] {
 .chapter-content h2 { margin-bottom: 20px; }
 .chapter-media img { cursor: zoom-in; border-radius: 4px; transition: transform 0.4s ease; }
 .chapter-media img:hover { transform: scale(1.02); }
-.chapter-block:nth-child(even) .chapter-content { order: 2; }
-.chapter-block:nth-child(even) .chapter-media { order: 1; }
+.chapter-block-reverse .chapter-content { order: 2; }
+.chapter-block-reverse .chapter-media { order: 1; }
 @media (max-width: 980px) {
   .chapter-grid { grid-template-columns: 1fr; }
-  .chapter-block:nth-child(even) .chapter-content { order: 1; }
-  .chapter-block:nth-child(even) .chapter-media { order: 2; }
+  .chapter-block-reverse .chapter-content { order: 1; }
+  .chapter-block-reverse .chapter-media { order: 2; }
 }
 .lightbox-modal { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(5,7,9,0.95); align-items: center; justify-content: center; padding: 40px; }
 .lightbox-modal.active { display: flex; }
