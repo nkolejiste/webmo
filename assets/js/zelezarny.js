@@ -139,6 +139,7 @@ function initZelezarnyInteractions() {
       if (!(detailDialog instanceof HTMLDialogElement)) return;
       detailOpener = link;
       if (!detailDialog.open) detailDialog.showModal();
+      document.body.classList.add("detail-open");
       detailDialog.querySelector(".chapter-detail-shell")?.scrollTo({ top: 0 });
       detailDialog.querySelector(".chapter-detail-close")?.focus();
     });
@@ -162,6 +163,7 @@ function initZelezarnyInteractions() {
     });
 
     detailDialog.addEventListener("close", () => {
+      document.body.classList.remove("detail-open");
       detailOpener?.focus();
     });
   });

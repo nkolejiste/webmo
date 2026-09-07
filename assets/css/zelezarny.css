@@ -24,7 +24,8 @@ body {
   overflow-x: hidden;
 }
 
-body.menu-open { overflow: hidden; }
+body.menu-open,
+body.detail-open { overflow: hidden; }
 
 img {
   width: 100%;
@@ -707,6 +708,7 @@ section[id] {
   background: #0b0e11;
   color: var(--text);
   overflow: hidden;
+  overscroll-behavior: contain;
 }
 
 .chapter-detail-dialog::backdrop {
@@ -718,6 +720,8 @@ section[id] {
   position: relative;
   max-height: calc(100dvh - 38px);
   overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
   padding: 72px 58px 62px;
 }
 
