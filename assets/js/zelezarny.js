@@ -172,22 +172,22 @@ function initZelezarnyInteractions() {
   const lightboxImg = document.getElementById("lightboxImg");
   const closeBtn = document.querySelector(".lightbox-close");
 
-  if (lightboxModal && lightboxImg) {
-    document.querySelectorAll(".chapter-media img").forEach(img => {
+  if (lightboxModal instanceof HTMLDialogElement && lightboxImg) {
+    document.querySelectorAll(".chapter-media img, .chapter-detail-gallery img").forEach(img => {
       img.addEventListener("click", () => {
         lightboxImg.src = img.src;
         lightboxImg.alt = img.alt || "Detailní fotka";
-        lightboxModal.classList.add("active");
+        if (!lightboxModal.open) lightboxModal.showModal();
       });
     });
 
-    const closeLightbox = () => lightboxModal.classList.remove("active");
+    const closeLightbox = () => {
+      if (lightboxModal.open) lightboxModal.close();
+    };
+
     closeBtn?.addEventListener("click", closeLightbox);
     lightboxModal.addEventListener("click", event => {
       if (event.target === lightboxModal) closeLightbox();
-    });
-    window.addEventListener("keydown", event => {
-      if (event.key === "Escape") closeLightbox();
     });
   }
 }
