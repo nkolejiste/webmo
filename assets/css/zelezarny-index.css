@@ -1,6 +1,6 @@
 .hero {
   color: white;
-  background: #ffffff;
+  background: var(--bg);
   min-height: 100svh;
   position: relative;
   display: flex;

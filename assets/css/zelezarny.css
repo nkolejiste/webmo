@@ -1,5 +1,5 @@
 :root {
-  --bg: #ffffff;
+  --bg: #f5f5f3;
   --text: #111315;
   --muted: #666c72;
   --line: rgba(17, 19, 21, 0.14);
@@ -196,7 +196,7 @@ button { font: inherit; }
 .page-hero-image {
   position: relative;
   overflow: hidden;
-  background: #ffffff;
+  background: var(--bg);
   color: white;
 }
 
@@ -370,7 +370,7 @@ section[id] {
   .main-nav {
     position: fixed;
     inset: 0;
-    background: rgba(255,255,255,.98);
+    background: rgba(245,245,243,.98);
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
