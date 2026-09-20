@@ -219,6 +219,18 @@ button { font: inherit; }
     linear-gradient(180deg, rgba(5,7,9,.12) 0%, rgba(5,7,9,.68) 100%);
 }
 
+.page-hero-image::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 96px;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.55) 62%, #ffffff 100%);
+}
+
 .page-hero-image .page-hero-grid {
   position: relative;
   z-index: 1;
@@ -403,4 +415,8 @@ section[id] {
   .circle-link { width: 72px; height: 72px; flex: 0 0 auto; }
   .footer-grid { grid-template-columns: 1fr; }
   .copyright { grid-column: auto; margin-top: 10px; }
+}
+
+@media (max-width: 640px) {
+  .page-hero-image::after { height: 68px; }
 }
