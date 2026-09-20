@@ -8,8 +8,7 @@
   overflow: hidden;
 }
 
-.hero-media,
-.hero-overlay {
+.hero-media {
   position: absolute;
   inset: 0;
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 80%, rgba(0,0,0,.96) 84%, rgba(0,0,0,.78) 89%, rgba(0,0,0,.48) 94%, rgba(0,0,0,.18) 98%, transparent 100%);
@@ -22,17 +21,12 @@
   transform: scale(1.03);
 }
 
-.hero-overlay {
-  background:
-    linear-gradient(90deg, rgba(5,7,9,.90) 0%, rgba(5,7,9,.52) 48%, rgba(5,7,9,.14) 100%),
-    linear-gradient(0deg, rgba(5,7,9,.82) 0%, transparent 45%);
-}
-
 
 .hero-content {
   position: relative;
   z-index: 2;
   padding-bottom: 90px;
+  text-shadow: 0 2px 14px rgba(0,0,0,.42);
 }
 
 .display-title {
@@ -48,7 +42,7 @@
   max-width: 590px;
   margin: 35px 0 38px;
   font-size: clamp(17px, 2vw, 22px);
-  color: rgba(255,255,255,.74);
+  color: rgba(255,255,255,.92);
 }
 
 .text-link,
