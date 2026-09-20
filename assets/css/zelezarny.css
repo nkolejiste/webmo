@@ -217,8 +217,8 @@ button { font: inherit; }
 
 .page-hero-overlay {
   background:
-    linear-gradient(90deg, rgba(5,7,9,.88) 0%, rgba(5,7,9,.58) 45%, rgba(5,7,9,.24) 100%),
-    linear-gradient(180deg, rgba(5,7,9,.12) 0%, rgba(5,7,9,.68) 100%);
+    linear-gradient(90deg, rgba(5,7,9,.44) 0%, rgba(5,7,9,.29) 45%, rgba(5,7,9,.12) 100%),
+    linear-gradient(180deg, rgba(5,7,9,.06) 0%, rgba(5,7,9,.34) 100%);
 }
 
 
