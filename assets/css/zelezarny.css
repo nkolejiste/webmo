@@ -315,16 +315,18 @@ section[id] {
 .chapter-block-reverse .chapter-media { order: 1; }
 
 .lightbox-modal {
-  width: 100%;
-  height: 100%;
+  width: 100dvw;
+  height: 100dvh;
   max-width: none;
   max-height: none;
   margin: 0;
   border: 0;
   padding: 40px;
-  background: var(--bg);
+  background: #ffffff;
+  background-color: #ffffff;
   color: var(--text);
   overflow: hidden;
+  box-shadow: none;
 }
 
 .lightbox-modal[open] {
@@ -333,7 +335,10 @@ section[id] {
   justify-content: center;
 }
 
-.lightbox-modal::backdrop { background: rgba(255,255,255,.96); }
+.lightbox-modal::backdrop {
+  background: #ffffff;
+  opacity: 1;
+}
 
 .lightbox-modal img {
   width: auto;
