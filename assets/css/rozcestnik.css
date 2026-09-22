@@ -142,28 +142,6 @@ a { color: inherit; text-decoration: none; }
 
 
 
-.theme-toggle {
-  width: 28px;
-  height: 28px;
-  padding: 0;
-  border: 1px solid currentColor;
-  border-radius: 0;
-  background: linear-gradient(135deg, #111315 0 50%, #ffffff 50% 100%);
-  cursor: pointer;
-  transition: transform .25s ease, opacity .25s ease;
-}
-
-.theme-toggle:hover { transform: scale(1.08); }
-.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-
-.theme-toggle-floating {
-  position: absolute;
-  top: 30px;
-  right: max(24px, calc((100vw - var(--container)) / 2));
-  z-index: 20;
-  color: white;
-}
-
 html[data-theme="dark"] {
   color-scheme: dark;
   --bg: #080a0c;
@@ -198,6 +176,3 @@ html[data-theme="dark"] .areal-card::after { background: linear-gradient(0deg, r
 html[data-theme="dark"] .areal-label { color: rgba(255,255,255,.45); }
 html[data-theme="dark"] .site-footer { background: #050607; }
 
-@media (max-width: 720px) {
-  .theme-toggle-floating { top: 22px; right: 22px; }
-}

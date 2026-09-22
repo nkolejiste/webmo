@@ -102,21 +102,6 @@ button { font: inherit; }
 }
 
 
-.theme-toggle {
-  width: 28px;
-  height: 28px;
-  flex: 0 0 28px;
-  padding: 0;
-  border: 1px solid currentColor;
-  border-radius: 0;
-  background: linear-gradient(135deg, #111315 0 50%, #ffffff 50% 100%);
-  cursor: pointer;
-  transition: transform .25s ease, opacity .25s ease;
-}
-
-.theme-toggle:hover { transform: scale(1.08); }
-.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-
 html[data-theme="dark"] {
   color-scheme: dark;
   --bg: #080a0c;
