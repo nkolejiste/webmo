@@ -184,3 +184,13 @@
     height: 230px;
   }
 }
+
+
+html[data-theme="dark"] .chapter-detail-link:hover { color: white; }
+
+html[data-theme="dark"] .chapter-detail-dialog {
+  border-color: rgba(255,255,255,.13);
+  background: #0b0e11;
+}
+
+html[data-theme="dark"] .chapter-detail-close { background: rgba(8,10,12,.84); }

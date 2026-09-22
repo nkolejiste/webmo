@@ -10,6 +10,13 @@
   <meta property="og:description" content="Modulové kolejiště Železárny v měřítku N 1:160.">
   <meta property="og:image" content="../assets/images/zelezarny/uvodni-foto.jpg">
   <title>Železárny | N kolejiště</title>
+  <script>
+    try {
+      document.documentElement.dataset.theme = localStorage.getItem("n-kolejiste-theme") === "dark" ? "dark" : "light";
+    } catch {
+      document.documentElement.dataset.theme = "light";
+    }
+  </script>
   <link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../assets/css/zelezarny.css">
   <link rel="stylesheet" href="../assets/css/zelezarny-index.css">

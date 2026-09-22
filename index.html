@@ -6,6 +6,13 @@
   <meta name="description" content="Modulové kolejiště v měřítku N 1:160 – průmyslové moduly železáren a rafinerie.">
   <meta name="theme-color" content="#f5f5f3">
   <title>Modulové kolejiště</title>
+  <script>
+    try {
+      document.documentElement.dataset.theme = localStorage.getItem("n-kolejiste-theme") === "dark" ? "dark" : "light";
+    } catch {
+      document.documentElement.dataset.theme = "light";
+    }
+  </script>
 
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/rozcestnik.css">

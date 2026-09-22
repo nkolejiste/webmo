@@ -413,3 +413,74 @@ section[id] {
   .copyright { grid-column: auto; margin-top: 10px; }
 }
 
+
+
+.theme-toggle {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  padding: 0;
+  border: 1px solid currentColor;
+  border-radius: 0;
+  background: linear-gradient(135deg, #111315 0 50%, #ffffff 50% 100%);
+  cursor: pointer;
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+.theme-toggle:hover { transform: scale(1.08); }
+.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #080a0c;
+  --text: #f1f1ed;
+  --muted: #9ca2a8;
+  --line: rgba(255, 255, 255, 0.13);
+}
+
+html[data-theme="dark"] .site-header.scrolled {
+  background: rgba(8, 10, 12, .72);
+  box-shadow: none;
+}
+
+html[data-theme="dark"] .site-header:not(.scrolled) .main-nav a { color: rgba(255,255,255,.72); }
+html[data-theme="dark"] .site-header.scrolled .main-nav a { color: rgba(255,255,255,.72); }
+html[data-theme="dark"] .site-header.scrolled .main-nav a:hover,
+html[data-theme="dark"] .site-header.scrolled .main-nav a.active { color: var(--text); }
+
+html[data-theme="dark"] .page-hero {
+  background:
+    radial-gradient(circle at 75% 20%, rgba(213,74,60,.11), transparent 32%),
+    linear-gradient(180deg, #0b0e11, #080a0c);
+}
+
+html[data-theme="dark"] .page-hero-media,
+html[data-theme="dark"] .page-hero-overlay {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+html[data-theme="dark"] .page-hero-overlay {
+  background:
+    linear-gradient(90deg, rgba(5,7,9,.88) 0%, rgba(5,7,9,.58) 45%, rgba(5,7,9,.24) 100%),
+    linear-gradient(180deg, rgba(5,7,9,.12) 0%, rgba(5,7,9,.68) 100%);
+}
+
+html[data-theme="dark"] .site-footer { background: #050607; }
+
+html[data-theme="dark"] .lightbox-modal {
+  background: rgba(5,7,9,.95);
+  background-color: rgba(5,7,9,.95);
+  color: white;
+}
+
+html[data-theme="dark"] .lightbox-modal::backdrop { background: rgba(0,0,0,.28); }
+html[data-theme="dark"] .lightbox-close { color: white; }
+
+@media (max-width: 980px) {
+  html[data-theme="dark"] .main-nav { background: rgba(8,10,12,.98); }
+  html[data-theme="dark"] .main-nav a { color: rgba(255,255,255,.72); }
+  html[data-theme="dark"] .main-nav a:hover,
+  html[data-theme="dark"] .main-nav a.active { color: var(--text); }
+  html[data-theme="dark"] body.menu-open .site-header { color: var(--text); }
+}

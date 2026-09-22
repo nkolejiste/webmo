@@ -189,3 +189,26 @@
   .stat-label { font-size: 11px; }
 }
 
+
+
+html[data-theme="dark"] .hero-media,
+html[data-theme="dark"] .hero-overlay {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+html[data-theme="dark"] .hero-overlay {
+  background:
+    linear-gradient(90deg, rgba(5,7,9,.90) 0%, rgba(5,7,9,.52) 48%, rgba(5,7,9,.14) 100%),
+    linear-gradient(0deg, rgba(5,7,9,.82) 0%, transparent 45%);
+}
+
+html[data-theme="dark"] .hero-lead { color: rgba(255,255,255,.74); }
+html[data-theme="dark"] .button-link { border-bottom-color: rgba(255,255,255,.35); }
+
+html[data-theme="dark"] .stat-circle {
+  background: #f1f1ed;
+  color: #0b0d10;
+  border-color: transparent;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.05), 0 18px 45px rgba(0,0,0,.20);
+}

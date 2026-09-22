@@ -10,6 +10,13 @@
 <meta content="Projekt | Železárny" property="og:title"/>
 <meta content="Projekt modulového kolejiště Železárny." property="og:description"/>
 <title>Projekt | Železárny</title>
+  <script>
+    try {
+      document.documentElement.dataset.theme = localStorage.getItem("n-kolejiste-theme") === "dark" ? "dark" : "light";
+    } catch {
+      document.documentElement.dataset.theme = "light";
+    }
+  </script>
 <link href="../assets/images/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="../assets/css/zelezarny.css" rel="stylesheet"/>
 <link href="../assets/css/zelezarny-projekt.css" rel="stylesheet"/>
