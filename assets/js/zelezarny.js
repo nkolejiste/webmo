@@ -83,7 +83,7 @@ function renderZelezarnyHeader() {
 
     <nav class="main-nav" id="mainNav" aria-label="Navigace Železáren">
       ${links}
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Přepnout na tmavý motiv"></button>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Přepnout na tmavý motiv"><span class="theme-toggle-thumb" aria-hidden="true"></span></button>
     </nav>`;
 }
 
